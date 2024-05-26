@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../stylesheets/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>followers</title>
+</head>
+
+<body>
+    <div class="main bg-black h-screen text-white">
+
+        <div class="font-semibold text-center h-[8.2vh] flex justify-center items-center  border-b border-b-zinc-800">
+            FOLLOWERS
+        </div>
+
+        <% followers.forEach((hero)=> { %>
+            <div class="h-[15vh] mt-3 pl-3 flex gap-5">
+                <img src="<%= hero.profile %>" class="h-[11vh] w-[11vh] object-cover object-top rounded-full">
+                <div class="flex justify-between w-[68vw]">
+                    <div class="flex flex-col justify-top pt-3">
+                        <p class="font-bold uppercase">
+                            <%= hero.fullname %>
+                        </p>
+                        <p class="text-[12px] text-zinc-500">
+                            @<%= hero.username %>
+                        </p>
+                    </div>
+                    <% if(hero.followers.includes(user._id)) { %>
+                        <div class="flex flex-col gap-1">
+                            <button
+                                class="bg-zinc-700 h-[5vh] mt-3 px-2 rounded-md text-white text-[12px]">following</button>
+
+                        </div>
+                        <% } else { %>
+                            <form action="/follow/<%= hero.username %>" method="post"><button
+                                    class="bg-blue-500 h-[5vh] mt-3 px-2 rounded-md text-white">follow</button>
+                            </form>
+                            <% } %>
+                </div>
+            </div>
+            <% }) %>
+
+                <div class=" footer fixed h-[7vh] flex p-3 justify-between items-center w-screen bg-black bottom-0">
+
+                    <a href="/feed"><i class="fa-solid fa-house text-xl"></i></a>
+
+                    <a href="/search"><i class="fa-solid fa-magnifying-glass text-xl"></i></a>
+
+                    <a href="/post"><i class="fa-solid fa-square-plus text-2xl"></i></a>
+
+                    <a href="/profile"><img src="<%= user.profile %>"
+                            class="h-8 w-8 rounded-full object-cover object-top"></a>
+
+                </div>
+    </div>
+</body>
+
+</html>
